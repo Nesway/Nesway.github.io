@@ -3,22 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Effet Flottant</title>
+    <title>Effet avec une bulle</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
             margin: 0;
+            padding: 0;
+            height: 200vh; /* Pour créer un scroll */
             background-color: #f0f0f0;
         }
 
+        /* Style du texte flottant */
         h1 {
             font-size: 3rem;
+            text-align: center;
             color: #333;
             animation: floating 2s ease-in-out infinite;
+            margin-top: 20vh;
         }
 
         @keyframes floating {
@@ -32,9 +33,47 @@
                 transform: translateY(0);
             }
         }
+
+        /* Style de la bulle */
+        .bubble {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 100px;
+            height: 100px;
+            background-color: red;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-weight: bold;
+            font-size: 18px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+            transform: translateY(0);
+            transition: transform 0.2s ease;
+        }
     </style>
 </head>
 <body>
     <h1>Bonjour avec un effet flottant</h1>
+
+    <div class="bubble">
+        MMI
+    </div>
+
+    <script>
+        // Récupérer la bulle
+        const bubble = document.querySelector('.bubble');
+
+        // Ajouter un écouteur d'événement sur le scroll
+        window.addEventListener('scroll', () => {
+            // Récupérer la position du scroll
+            let scrollPosition = window.scrollY;
+
+            // Modifier la position de la bulle en fonction du scroll
+            bubble.style.transform = `translateY(${scrollPosition / 3}px)`; // Ajuster la vitesse du mouvement ici
+        });
+    </script>
 </body>
 </html>
